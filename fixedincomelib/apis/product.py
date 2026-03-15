@@ -178,7 +178,40 @@ def qfCreateProductRFRSwap(
 
 
 ## TODO: Implement qfCreateProductOvernightIndexBasisSwap
+def qfCreateProductOvernightIndexBasisSwap(
+    effective_date: str,
+    term_or_termination_date: str,
+    pay_offset: str,
+    index_1: str,
+    index_2: str,
+    spread: float,
+    pay_or_receive_leg1: str,
+    notional: float,
+    accrual_period_leg1: str,
+    accrual_period_leg2: str,
+    accrual_basis: str,
+    long_or_short: Optional[str] = "Long",
+    compounding_method: Optional[str] = "compound",
+    pay_business_day_convention: Optional[str] = "F",
+    pay_holiday_convention: Optional[str] = "USGS",
+) -> ProductOvernightIndexBasisSwap:
 
+    return ProductOvernightIndexBasisSwap(
+        effective_date=Date(effective_date),
+        term_or_termination_date=TermOrTerminationDate(term_or_termination_date),
+        payment_off_set=Period(pay_offset),
+        on_index_1=index_1,
+        on_index_2=index_2,
+        spread_over_leg_1=spread,
+        pay_or_rec_leg_1=PayOrReceive(pay_or_receive_leg1),
+        notional=notional,
+        accrual_period_1=Period(accrual_period_leg1),
+        accrual_period_2=Period(accrual_period_leg2),
+        accrual_basis=AccrualBasis(accrual_basis),
+        compounding_method=CompoundingMethod.from_string(compounding_method),
+        pay_business_day_convention=BusinessDayConvention(pay_business_day_convention),
+        pay_holiday_convention=HolidayConvention(pay_holiday_convention),
+    )
 
 def qfCreateBondSpecs(key: str, parameters: dict) -> BondSpecs:
 

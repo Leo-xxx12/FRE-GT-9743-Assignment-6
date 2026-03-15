@@ -182,6 +182,10 @@ class YieldCurve(Model):
             frame[index] = yc_component.market_data
         frame = np.concatenate(frame, axis=0)
         return np.concatenate([frame, grad.reshape(len(frame), 1)], axis=1)
+    
+    def currency(self) -> Currency:
+
+        return self.currency_
 
 
 class YieldCurveModelComponent(ModelComponent):
